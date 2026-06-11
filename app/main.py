@@ -41,13 +41,20 @@ app.include_router(api_v1_router, prefix=settings.API_V1_STR)
 
 # CORS Configuration
 if settings.CORS_ORIGINS:
+    # app.add_middleware(
+    #     CORSMiddleware,
+    #     allow_origins=[str(origin) for origin in settings.CORS_ORIGINS],
+    #     allow_credentials=True,
+    #     allow_methods=["*"],
+    #     allow_headers=["*"],
+    # )
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=[str(origin) for origin in settings.CORS_ORIGINS],
-        allow_credentials=True,
+         allow_origins=["*"],
+        allow_credentials=False,
         allow_methods=["*"],
         allow_headers=["*"],
-    )
+     )
 
 @app.get("/health", tags=["health"])
 async def health_check():
